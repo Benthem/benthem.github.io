@@ -1,10 +1,104 @@
-<html>
-	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="daily.js"></script>
-	</head>
-	<body>
-		<!--<button class="prev">Back</button><button class="next">Next</button>-->
-		<div class="descr"></div>
-	</body>
-</html>
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/style.css">
+      <!--Import jQuery before materialize.js-->
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+      <script type="text/javascript" src="js/materialize.js"></script>
+      <script src="https://code.createjs.com/createjs-2015.11.26.combined.js"></script>
+      <script type="text/javascript" src="js/code.js"></script>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>    
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Indoor Hockey</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">help</i></a>
+          <ul id="nav-mobile" class="right hide-on-small-and-down">
+            <li><a id="howto" href="#modal1">How to use</a></li>
+          </ul>
+          <ul id="mobile-demo" class="right side-nav">
+            <div class="container">
+              <p class="caption">How to use</p>
+              <p>
+                This webpage offers a simulation board to visualise Indoor Hockey tactics. You can drag the ball and players to create different offensive and defensive formations.
+              </p>
+              
+              <p><i class="material-icons preview red">settings</i><span> Settings allow you to toggle the area overlay for each team and the 3m range on the ball.</span></p>
+              
+              <p><i class="material-icons preview red">play_arrow</i><span> Animations offer some preset formations, showing off defensive strategy from blue side point of view.</span></p>
+              <input class="noshow" type="checkbox" id="noshow" />
+              <label for="noshow">Don't show this in the future</label>
+              <div class="btn-large waves-effect red side-nav-close" id="okay">I got it</div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="row">
+        <div class="col s10 offset-s1 m8 offset-m2 l4 offset-l4 wrapper">
+          <canvas id="a"></canvas>
+          <canvas id="b"></canvas>
+          <canvas id="c"></canvas>
+        </div>
+      </div>
+        <div class="fixed-action-btn">
+          <a class="btn-floating btn-large red">
+            <i class="large material-icons">play_arrow</i>
+          </a>
+          <ul>
+            <li><a class="btn-floating green animate" id="ani1"><i class="material-icons">looks_one</i></a>
+            </li>
+            <li><a class="btn-floating green animate" id="ani2"><i class="material-icons">looks_two</i></a>
+            </li>
+            <li><a class="btn-floating green animate" id="ani3"><i class="material-icons">looks_3</i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="fixed-action-btn left-btn">
+          <a class="btn-floating btn-large red">
+            <i class="large material-icons">settings</i>
+          </a>
+          <ul>
+            <li><a class="btn-floating yellow darken-2 ball"><i class="material-icons">album</i></a>
+            </li>
+            <li><a class="btn-floating blue darken-4 shadow" id="blue"><i class="material-icons">network_wifi</i></a>
+            </li>
+            <li><a class="btn-floating red darken-4 shadow" id="red"><i class="material-icons">signal_wifi_off</i></a>
+            </li>
+          </ul>
+        </div>
+
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+            <div class="container">
+              <p class="caption">How to use</p>
+              <p>
+                This webpage offers a simulation board to visualise Indoor Hockey tactics. You can drag the ball and players to create different offensive and defensive formations.
+              </p>
+              
+              <p><i class="material-icons preview red">settings</i><span> Settings allow you to toggle the area overlay for each team and the 3m range on the ball.</span></p>
+              
+              <p><i class="material-icons preview red">play_arrow</i><span> Animations offer some preset formations, showing off defensive strategy from blue side point of view.</span></p>
+              <input class="noshow" type="checkbox" id="noshow2" />
+              <label for="noshow2">Don't show this in the future</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+
+      <div id="warning">
+        Please rotate your device.
+      </div>
+    </body>
+  </html>
