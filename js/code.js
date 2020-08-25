@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$("#modal1").modal();
 	$(".button-collapse").sideNav();
 
-	cookie = document.cookie;
+	/*cookie = document.cookie;
 	if(cookie === ""){
 		if(window.innerWidth > 600) {
 			$('#modal1').modal('open');
@@ -20,13 +20,13 @@ $(document).ready(function(){
 		}
 	} else {
 		$('.noshow').prop('checked', true);
-	}
+	}*/
 
 	a = $('#a')[0].getContext('2d');
 	c = $('#c')[0].getContext('2d');
-	c.canvas.height = 760;
+	c.canvas.height = 800;
 	c.canvas.width = 480;
-	a.canvas.height = 760;
+	a.canvas.height = 800;
 	a.canvas.width = 480;
 
 
@@ -175,19 +175,23 @@ function tick(event){
 
 function drawField(){
 	back = $('#b')[0].getContext('2d');
-	back.canvas.height = 760;
+	back.canvas.height = 800;
 	back.canvas.width = 480;
 	back = new createjs.Stage("b");
 	field = new createjs.Shape();
 	field.graphics.beginStroke("#000")
 		.setStrokeStyle(1)
-		.drawRect(20,20,440,720)
-		.moveTo(20,380)
-		.lineTo(460, 380)
+		.drawRect(20,20,440,780)
+		.moveTo(20,420)
+		.lineTo(460, 420)
+		.moveTo(20,220)
+		.lineTo(460, 220)
+		.moveTo(20, 600)
+		.lineTo(460, 600)
 		.moveTo(420, 20)
 		.arc(240, 20, 180, 0, Math.PI)
-		.moveTo(60, 740)
-		.arc(240, 740, 180, Math.PI, 0)
+		.moveTo(60, 800)
+		.arc(240, 800, 180, Math.PI, 0)
 		.es();
 	field.snapToPixel = true;
 	back.addChild(field);
@@ -461,7 +465,7 @@ class Anim {
 
 function cornerify(p1, pl){
 	var x, y;
-	if(p1.y % 720 == 20){ //
+	if(p1.y % 780 == 20){ //
 		if(pl.p.x < ball.p.x){
 			x = 20
 			y = p1.y;
@@ -475,7 +479,7 @@ function cornerify(p1, pl){
 			y = 20;
 		} else {
 			x = p1.x;
-			y = 740;
+			y = 800;
 		}
 	}
 	return new Point(x, y);
@@ -486,18 +490,18 @@ function line(point){
 	var p;
 	if(point.x > ball.p.x){
 		p = new Point(460, ball.p.y+(460-ball.p.x)*d);
-		if (p.y > 740){
-			p.y = 740;
-			p.x = ball.p.x+(740-ball.p.y)/d;
+		if (p.y > 800){
+			p.y = 800;
+			p.x = ball.p.x+(800-ball.p.y)/d;
 		} else if (p.y < 20){
 			p.y = 20;
 			p.x = ball.p.x-(ball.p.y-20)/d;
 		}
 	} else {
 		p = new Point(20, ball.p.y-(ball.p.x-20)*d);
-		if (p.y > 740){
-			p.y = 740;
-			p.x = ball.p.x+(740-ball.p.y)/d;
+		if (p.y > 800){
+			p.y = 800;
+			p.x = ball.p.x+(800-ball.p.y)/d;
 		} else if (p.y < 20){
 			p.y = 20;
 			p.x = ball.p.x-(ball.p.y-20)/d;
