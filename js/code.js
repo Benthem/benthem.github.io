@@ -48,7 +48,7 @@ $(document).ready(function(){
 	teams.push(new Team("Red"));
 	teams[1].shadow = false;
 	for(var t in teams){
-		for(var i = 0; i<6; i++){
+		for(var i = 0; i<11; i++){
 			teams[t].addPlayer(50+50*t,50+50*i);
 		}
 	}
@@ -295,7 +295,7 @@ class Player {
 		this.team = team;
 		this.hasBall = false;
 
-		this.player.graphics.beginFill(this.team.color).beginStroke("Black").arc(0, 0, 15, 0, Math.PI*2);
+		this.player.graphics.beginFill(this.team.color).beginStroke("Black").arc(0, 0, 5, 0, Math.PI*2);
 		this.player.graphics.setStrokeStyle(2).moveTo(-24, 0).lineTo(24, 0);
 		this.player.x = this.p.x;
 		this.player.y = this.p.y;
