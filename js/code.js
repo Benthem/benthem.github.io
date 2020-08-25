@@ -3,6 +3,7 @@ var currentAnimation, animating;
 var drag = false, dragged = false;;
 var teams = [];
 var animations = {};
+var arrowPoint = {};
 
 //debug variables
 var ball1, ball2;
@@ -30,7 +31,7 @@ $(document).ready(function(){
 	a.canvas.width = 480;
 
 
-	drawField();
+	backStage = drawField();
 
 	stage1 = new createjs.Stage("c");
 	stage2 = new createjs.Stage("a");
@@ -194,6 +195,19 @@ $(document).ready(function(){
 		}
 	});
 
+	stage1.addEventListener("stagemousedown", function(evt){
+		arrowPoint = new Point(evt.stageX, evt.stageY);
+	});
+
+	stage1.addEventListener("stagemouseup", function(evt) {
+		if (!drag){
+			if (Math.abs(evt.stageX - arrowPoint.x) < 10 && Math.abs(evt.stageY - arrowPoint.y) < 10){
+				return
+			}
+			new Arrow(arrowPoint, new Point(evt.stageX, evt.stageY));
+		}
+	});
+
 	createjs.Ticker.setFPS(30);
 	createjs.Ticker.addEventListener("tick", tick);
 
@@ -235,6 +249,7 @@ function drawField(){
 	back.addChild(field);
 
 	back.update();
+	return back;
 }
 
 class Team {
@@ -326,6 +341,44 @@ class Ball {
 			stage2.update();
 		}
 	}
+}
+
+var LINE_RADIUS = 3
+var ARROWHEAD_RADIUS = 5;
+var ARROWHEAD_DEPTH = 10;
+
+class Arrow {
+	constructor(start, end){
+		var _self = this;
+        this.arrow = new createjs.Shape();
+        var arrowSize = dist(start, end);
+        var arrowRotation = angle(start, end);
+        this.arrow.graphics.s("Black")
+                .f("Black")
+                .mt(0, 0)
+                .lt(0, LINE_RADIUS)
+                .lt(arrowSize - ARROWHEAD_DEPTH, LINE_RADIUS)
+                .lt(arrowSize - ARROWHEAD_DEPTH, ARROWHEAD_RADIUS)
+                .lt(arrowSize, 0)
+                .lt(arrowSize - ARROWHEAD_DEPTH, -ARROWHEAD_RADIUS)
+                .lt(arrowSize - ARROWHEAD_DEPTH, -LINE_RADIUS)
+                .lt(0, -LINE_RADIUS)
+                .lt(0, 0)
+                .es();
+        this.arrow.x = start.x;
+        this.arrow.y = start.y;
+        this.arrow.alpha = 1;
+        this.arrow.rotation = arrowRotation;
+
+        this.arrow.addEventListener("click", function(evt){
+        	stage1.removeChild(_self.arrow);
+        	stage1.update();
+        });
+
+        stage1.addChild(this.arrow);
+        stage1.update();
+
+    }
 }
 
 class Player {
@@ -558,6 +611,10 @@ function dist(p1, p2){
 	var a = p1.x - p2.x;
 	var b = p1.y - p2.y;
 	return Math.sqrt(a*a+b*b);
+}
+
+function angle(p1, p2) {
+    return Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
 }
 
 function processAutoheight(){
