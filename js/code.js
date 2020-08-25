@@ -295,7 +295,7 @@ class Player {
 		this.team = team;
 		this.hasBall = false;
 
-		this.player.graphics.beginFill(this.team.color).beginStroke("Black").arc(0, 0, 5, 0, Math.PI*2);
+		this.player.graphics.beginFill(this.team.color).beginStroke("Black").arc(0, 0, 10, 0, Math.PI*2);
 		this.player.graphics.setStrokeStyle(2).moveTo(-24, 0).lineTo(24, 0);
 		this.player.x = this.p.x;
 		this.player.y = this.p.y;
