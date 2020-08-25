@@ -55,6 +55,41 @@ $(document).ready(function(){
 
 	stage1.update();
 
+	start_anim = new Anim(1000, 20, '{\
+							  "ball": [\
+							    185,\
+							    185\
+							  ],\
+							  "teams": [\
+							    [\
+									[230, 270],\
+									[350, 280],\
+									[400, 610],\
+									[240, 610],\
+									[240, 400],\
+									[110, 230],\
+									[400, 400],\
+									[110, 400],\
+									[240, 530],\
+									[110 , 610],\
+									[240, 790]\
+							    ],\
+							    [\
+									[240, 30],\
+									[160, 180],\
+									[320, 180],\
+									[420, 260],\
+									[70 , 260],\
+									[420, 650],\
+									[240, 440],\
+									[70 , 440],\
+									[420, 440],\
+									[70 , 650],\
+									[240, 650]\
+								]\
+							  ]\
+							}');
+
 	//Very hard coded player positions
 	animations["ani1"] = new Anim(1000, 20, '{\
 							  "ball": [\
@@ -165,6 +200,9 @@ $(document).ready(function(){
 	$(window).resize(function() { processAutoheight(); });
     $(document).resize(function() { processAutoheight(); });
     processAutoheight();
+
+	currentAnimation = start_anim.fresh();
+	animating = true;
 });
 
 function tick(event){
