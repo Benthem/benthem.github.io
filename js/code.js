@@ -49,7 +49,7 @@ $(document).ready(function(){
 	teams[1].shadow = false;
 	for(var t in teams){
 		for(var i = 0; i<11; i++){
-			teams[t].addPlayer(50+50*t,50+50*i);
+			teams[t].addPlayer(50+50*t,50+50*i, i);
 		}
 	}
 
@@ -62,30 +62,30 @@ $(document).ready(function(){
 							  ],\
 							  "teams": [\
 							    [\
+									[110, 230],\
 									[230, 270],\
 									[350, 280],\
-									[400, 610],\
-									[240, 610],\
-									[240, 400],\
-									[110, 230],\
-									[400, 400],\
 									[110, 400],\
+									[240, 400],\
+									[400, 400],\
 									[240, 530],\
 									[110 , 610],\
+									[240, 610],\
+									[400, 610],\
 									[240, 790]\
 							    ],\
 							    [\
-									[240, 30],\
+									[70 , 260],\
 									[160, 180],\
 									[320, 180],\
 									[420, 260],\
-									[70 , 260],\
-									[420, 650],\
-									[240, 440],\
 									[70 , 440],\
+									[240, 440],\
 									[420, 440],\
 									[70 , 650],\
-									[240, 650]\
+									[240, 650],\
+									[420, 650],\
+									[240, 30]\
 								]\
 							  ]\
 							}');
@@ -252,8 +252,8 @@ class Team {
 		stage2.update();
 	}
 
-	addPlayer(x, y){
-		this.players.push(new Player(x, y, this));
+	addPlayer(x, y, id){
+		this.players.push(new Player(x, y, this, id));
 	}
 }
 
@@ -329,7 +329,7 @@ class Ball {
 }
 
 class Player {
-	constructor(x, y, team){
+	constructor(x, y, team, id){
 		var _self = this;
 		this.p = new Point(x, y);
 		this.player = new createjs.Shape();
@@ -337,6 +337,7 @@ class Player {
 		this.team = team;
 		this.hasBall = false;
 
+		this.text = new createjs.Text(String(id+1), "12px Arial", "#ffffff");
 		this.player.graphics.beginFill(this.team.color).beginStroke("Black").arc(0, 0, 10, 0, Math.PI*2);
 		this.player.graphics.setStrokeStyle(2).moveTo(-24, 0).lineTo(24, 0);
 		this.player.x = this.p.x;
@@ -367,6 +368,7 @@ class Player {
 			drag = dragged = false;
 		});
 		stage1.addChild(this.player);
+		stage1.addChild(this.text);
 		_self.shadow();
 	}
 
@@ -395,6 +397,10 @@ class Player {
 	draw(draw){
 		this.player.x = this.p.x;
 		this.player.y = this.p.y;
+
+		var b = this.text.getBounds();
+		this.text.x = this.p.x - (b.width)/2
+		this.text.y = this.p.y - (b.height)/2;
 
 		if(draw){
 			stage1.update();
